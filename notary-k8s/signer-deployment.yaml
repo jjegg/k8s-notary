@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.19.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: signer
+  name: signer
+  namespace: demo-2
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.19.0 ()
+      creationTimestamp: null
+      labels:
+        io.kompose.service: signer
+    spec:
+      containers:
+      - args:
+        - -c
+        - notary-signer -config=fixtures/signer-config.json
+        command:
+        - /usr/bin/env
+        - sh
+        image: notary:signer-0.6.1-2
+        name: signer
+        resources: {}
+      restartPolicy: Always
+status: {}
